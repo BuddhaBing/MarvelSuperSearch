@@ -7,12 +7,14 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 
 import { MARVEL_CONSTANTS } from './../constants/marvel.constants';
+import { default as DynamicStringObjInterface } from '../interfaces/dynamic-string-object.interface';
 
 @Injectable()
 export class MarvelService {
 
   private searchTerm: string;
   private characterNames: Array<string> = [];
+  private characterList: DynamicStringObjInterface = {};
 
   constructor(private http: Http) {}
 
@@ -30,10 +32,15 @@ export class MarvelService {
         .catch(err => Observable.of([]));
   }
 
+  public getCharacter(characterName: string) {
+    const characterId = this.characterList[characterName];
+  }
+
   private addToCharacters(characters: any): void {
     for (const character of characters) {
       if (!this.isDuplicate(this.characterNames, character.name)) {
         this.characterNames.push(character.name);
+        this.characterList[character.name] = character.id;
       }
     }
   }

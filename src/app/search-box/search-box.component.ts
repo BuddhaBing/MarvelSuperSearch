@@ -35,6 +35,7 @@ export class SearchBoxComponent implements OnInit {
 
   @Output('selectItem')
   onSelectItem(event: NgbTypeaheadSelectItemEvent): void {
+    this._marvelService.getCharacter(event.item);
   }
 
 }
