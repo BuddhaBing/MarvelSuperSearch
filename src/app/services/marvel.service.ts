@@ -43,7 +43,11 @@ export class MarvelService {
   }
 
   private getFromCache(searchTerm: string): Array<string> {
-    return this.characterNames.filter(name => name.toLowerCase().substring(0, searchTerm.length) === searchTerm.toLowerCase());
+    return this.characterNames.filter(name => this.isMatchingSubstring(name, searchTerm));
+  }
+
+  private isMatchingSubstring(string: string, substring): boolean {
+    return string.toLowerCase().substring(0, substring.length) === substring.toLowerCase();
   }
 
   private get url(): string {
