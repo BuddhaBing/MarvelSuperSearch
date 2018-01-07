@@ -14,19 +14,19 @@ import { MarvelService } from './../services/marvel.service';
 })
 export class SearchBoxComponent implements OnInit {
 
-  @Input() placeholder: string;
+  @Input() placeholder?: string;
   public searchTerm: string;
 
   constructor(private _marvelService: MarvelService) { }
 
   ngOnInit() {
+    this.search(Observable.of('searchTerm'));
   }
 
-  search = (searchTerm$: Observable<string>) => {
+  search = (searchTerm$: Observable<string>) =>
     searchTerm$
       .debounceTime(400)
       .distinctUntilChanged()
-      .switchMap(term => this._marvelService.search(term));
-  }
+      .switchMap(term => this._marvelService.search(term))
 
 }

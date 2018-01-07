@@ -1,4 +1,4 @@
-import DynamicStringObj from '../interfaces/dynamic-string.interface';
+import DynamicStringObjInterface from '../interfaces/dynamic-string-object.interface';
 
 export const MARVEL_CONSTANTS: DynamicStringObj = {
     baseUrl: `https://gateway.marvel.com:443/v1/public/characters`,

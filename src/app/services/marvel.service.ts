@@ -24,10 +24,7 @@ export class MarvelService {
   }
 
   public get url(): string {
-    return `${MARVEL_CONSTANTS.baseUrl}
-            ?${MARVEL_CONSTANTS.searchQuery}
-            =${this.searchTerm}
-            &apikey=${MARVEL_CONSTANTS.publicApiKey}`;
+    return `${MARVEL_CONSTANTS.baseUrl}?${MARVEL_CONSTANTS.searchQuery}=${this.searchTerm}&apikey=${MARVEL_CONSTANTS.publicApiKey}`;
   }
 
 }
