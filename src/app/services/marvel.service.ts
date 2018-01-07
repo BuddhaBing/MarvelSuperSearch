@@ -19,6 +19,8 @@ export class MarvelService {
   public search(searchTerm: string): Observable<any> {
     if (searchTerm.length < 2) return Observable.of([]);
     this.searchTerm = searchTerm;
+    const cachedResults = this.getFromCache(searchTerm);
+    if (cachedResults.toString()) return Observable.of(cachedResults);
     return this.http.get(this.url)
         .map((res: Response) => {
           const characters = res.json().data.results;
@@ -38,6 +40,10 @@ export class MarvelService {
 
   private isDuplicate(arr: Array<any>, el: any): boolean {
     return arr.indexOf(el) !== -1;
+  }
+
+  private getFromCache(searchTerm: string): Array<string> {
+    return this.characterNames.filter(name => name.substring(0, searchTerm.length) === searchTerm);
   }
 
   private get url(): string {
