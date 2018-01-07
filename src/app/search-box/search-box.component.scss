@@ -1,0 +1,10 @@
+@import './../../styles';
+
+input {
+    margin-top: $search-box-top-margin;
+    @include center-horizontal($search-box-width);
+}
+.form-control {
+    width: $search-box-width;
+    max-width: $search-box-max-width;
+}
