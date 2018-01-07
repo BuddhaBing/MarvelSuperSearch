@@ -4,7 +4,6 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-
 import 'rxjs/add/observable/of';
 
 import { MARVEL_CONSTANTS } from './../constants/marvel.constants';
@@ -13,17 +12,34 @@ import { MARVEL_CONSTANTS } from './../constants/marvel.constants';
 export class MarvelService {
 
   private searchTerm: string;
+  private characterNames: Array<string> = [];
 
   constructor(private http: Http) {}
 
-  search(searchTerm: string): Observable<any> {
+  public search(searchTerm: string): Observable<any> {
     this.searchTerm = searchTerm;
     return this.http.get(this.url)
-        .map((res: Response) => res.json())
+        .map((res: Response) => {
+          const characters = res.json().data.results;
+          this.addToCharacters(characters);
+          return this.characterNames;
+        })
         .catch(err => Observable.of([]));
   }
 
-  public get url(): string {
+  private addToCharacters(characters: any): void {
+    for (const character of characters) {
+      if (!this.isDuplicate(this.characterNames, character.name)) {
+        this.characterNames.push(character.name);
+      }
+    }
+  }
+
+  private isDuplicate(arr: Array<any>, el: any): boolean {
+    return arr.indexOf(el) !== -1;
+  }
+
+  private get url(): string {
     return `${MARVEL_CONSTANTS.baseUrl}?${MARVEL_CONSTANTS.searchQuery}=${this.searchTerm}&apikey=${MARVEL_CONSTANTS.publicApiKey}`;
   }
 
