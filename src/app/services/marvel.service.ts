@@ -13,8 +13,10 @@ import { default as DynamicStringObjInterface } from '../interfaces/dynamic-stri
 export class MarvelService {
 
   private searchTerm: string;
+  private characterId: string;
   private characterNames: Array<string> = [];
   private characterList: DynamicStringObjInterface = {};
+  public character: any;
 
   constructor(private http: Http) {}
 
@@ -23,7 +25,7 @@ export class MarvelService {
     this.searchTerm = searchTerm;
     const cachedResults = this.getFromCache(searchTerm);
     if (cachedResults.toString()) return Observable.of(cachedResults);
-    return this.http.get(this.url)
+    return this.http.get(this.url.search)
         .map((res: Response) => {
           const characters = res.json().data.results;
           this.addToCharacters(characters);
@@ -32,8 +34,17 @@ export class MarvelService {
         .catch(err => Observable.of([]));
   }
 
+  public get selectedCharacter() {
+    return this.character;
+  }
+
   public getCharacter(characterName: string) {
-    const characterId = this.characterList[characterName];
+    this.characterId = this.characterList[characterName];
+    return this.http.get(this.url.character)
+        .map((res: Response) => {
+          return this.character = res.json().data.results[0];
+        })
+        .catch(err => Observable.throw(err));
   }
 
   private addToCharacters(characters: any): void {
@@ -57,8 +68,11 @@ export class MarvelService {
     return string.toLowerCase().substring(0, substring.length) === substring.toLowerCase();
   }
 
-  private get url(): string {
-    return `${MARVEL_CONSTANTS.baseUrl}?${MARVEL_CONSTANTS.searchQuery}=${this.searchTerm}&apikey=${MARVEL_CONSTANTS.publicApiKey}`;
+  private get url(): DynamicStringObjInterface {
+    return {
+      search: `${MARVEL_CONSTANTS.baseUrl}?${MARVEL_CONSTANTS.searchQuery}=${this.searchTerm}&apikey=${MARVEL_CONSTANTS.publicApiKey}`,
+      character: `${MARVEL_CONSTANTS.baseUrl}/${this.characterId}?apikey=${MARVEL_CONSTANTS.publicApiKey}`
+    };
   }
 
 }

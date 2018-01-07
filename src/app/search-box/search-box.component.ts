@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit  } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
@@ -17,11 +18,11 @@ import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap/typeahea
 export class SearchBoxComponent implements OnInit {
 
   @Input() placeholder?: string;
-  @Input() selectedItem: EventEmitter<any>;
+  @Input() selectedItem: EventEmitter<any> = new EventEmitter<any>();
 
   public searchTerm: string;
 
-  constructor(private _marvelService: MarvelService) { }
+  constructor(private _marvelService: MarvelService, private _router: Router) { }
 
   ngOnInit() {
     this.search(Observable.of('searchTerm'));
@@ -34,8 +35,10 @@ export class SearchBoxComponent implements OnInit {
       .switchMap(term => this._marvelService.search(term))
 
   @Output('selectItem')
-  onSelectItem(event: NgbTypeaheadSelectItemEvent): void {
-    this._marvelService.getCharacter(event.item);
+  onSelectItem(event: NgbTypeaheadSelectItemEvent) {
+    this._marvelService.getCharacter(event.item).subscribe((data) => {
+      this._router.navigateByUrl('/details');
+    });
   }
 
 }

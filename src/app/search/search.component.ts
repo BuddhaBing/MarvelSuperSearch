@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MarvelService } from '../services/marvel.service';
 
 @Component({
   selector: 'app-search',
@@ -8,13 +7,9 @@ import { MarvelService } from '../services/marvel.service';
 })
 export class SearchComponent implements OnInit {
 
-  constructor(public marvelService: MarvelService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  onSelectItem(event: Event) {
-    console.log(event);
   }
 
 }
