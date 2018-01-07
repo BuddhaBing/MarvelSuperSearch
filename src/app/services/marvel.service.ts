@@ -17,6 +17,7 @@ export class MarvelService {
   constructor(private http: Http) {}
 
   public search(searchTerm: string): Observable<any> {
+    if (searchTerm.length < 2) return Observable.of([]);
     this.searchTerm = searchTerm;
     return this.http.get(this.url)
         .map((res: Response) => {
