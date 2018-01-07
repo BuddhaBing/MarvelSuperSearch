@@ -12,4 +12,8 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSelectItem(event: Event) {
+    console.log(event);
+  }
+
 }
