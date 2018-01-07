@@ -1,27 +1,32 @@
-# MarvelSuperSearch
+# Marvel Super Search
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
+## Technologies
+* [TypeScript](https://www.typescriptlang.org/)
+* [Angular v5](https://angular.io/)
 
-## Development server
+## The Brief
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The task here is to build a simple web app that allows you to search for something and then select a result to view. The initial screen should provide a simple input for users to input their search term (think typeahead) and clicking on a result should take you to a new page with details of the item clicked.
 
-## Code scaffolding
+What you search for is up to you, please feel free to use any data set (or dummy data).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Feel free to use whatever technology you feel most comfortable with or think is most appropriate.
 
-## Build
+## <a name="install">Installation</a>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+```
+$ git clone https://github.com/treborb/MarvelSuperSearch.git
+$ cd MarvelSuperSearch
+$ npm install
+```
 
-## Running unit tests
+## <a name="usage">Usage</a>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+$ ng serve
+$ open http://localhost:4200
+```
 
-## Running end-to-end tests
+Begin entering a Marvel character's name into the search box to see a list of results.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Select a result to see details of your selected character
