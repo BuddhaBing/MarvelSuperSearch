@@ -26,7 +26,7 @@ export class SearchBoxComponent implements OnInit {
     searchTerm$
       .debounceTime(400)
       .distinctUntilChanged()
-      // .switchMap(term => this._marvelService.search(term));
+      .switchMap(term => this._marvelService.search(term));
   }
 
 }
