@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/switchMap';
 
 import { MarvelService } from './../services/marvel.service';
@@ -34,7 +32,7 @@ export class SearchBoxComponent implements OnInit {
     searchTerm$
       .debounceTime(400)
       .distinctUntilChanged()
-      .switchMap(term => this._marvelService.search(term)
-        .catch(() => Observable.of([]));
+      .switchMap((term) => this._marvelService.search(term))
+        .catch(() => Observable.of([]))
 
 }

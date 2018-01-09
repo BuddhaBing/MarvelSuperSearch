@@ -1,6 +1,7 @@
-import { Router } from '@angular/router';
-import { MarvelService } from './../services/marvel.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { MarvelService } from './../services/marvel.service';
 
 @Component({
   selector: 'app-details',
@@ -11,13 +12,16 @@ export class DetailsComponent implements OnInit {
 
   public selectedCharacter: any;
 
-  constructor(private _marvelService: MarvelService, private _router: Router) { }
+  constructor(
+    private _marvelService: MarvelService,
+    private _router: Router
+  ) { }
 
   ngOnInit() {
-    this.getCharacterFromService();
+    this.getCharacter();
   }
 
-  getCharacterFromService() {
+  getCharacter() {
     this.selectedCharacter = this._marvelService.selectedCharacter || this._router.navigateByUrl('');
   }
 

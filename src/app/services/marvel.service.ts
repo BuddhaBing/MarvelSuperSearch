@@ -35,15 +35,21 @@ export class MarvelService {
         .catch(err => Observable.of([]));
   }
 
-  public get selectedCharacter() {
+  public get selectedCharacter(): any {
     return this.character;
   }
 
+  public set selectedCharacter(character: any) {
+    this.character = character;
+  }
+
   public getCharacter(characterName: string) {
+    this.selectedCharacter = null;
     this.characterId = this.characterList[characterName];
     return this.http.get(this.url.character)
         .map((res: Response) => {
-          return this.character = res.json().data.results[0];
+          this.selectedCharacter = res.json().data.results[0];
+          return this.selectedCharacter;
         })
         .catch(err => Observable.throw(err));
   }

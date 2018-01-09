@@ -3,7 +3,7 @@
   <div class="image">
     <img src="{{selectedCharacter.thumbnail.path + '.' + selectedCharacter.thumbnail.extension}}" alt="{{selectedCharacter.name}}">
   </div>
-  <div class="description">
+  <div *ngIf="selectedCharacter.description" class="description">
     <p>
       {{selectedCharacter.description}}
     </p>
