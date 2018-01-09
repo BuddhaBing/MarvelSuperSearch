@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,15 +10,12 @@ import { MarvelService } from './../services/marvel.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent {
 
   constructor(
     private _marvelService: MarvelService,
     private _router: Router
   ) {}
-
-  ngOnInit() {
-  }
 
   getCharacter(event: NgbTypeaheadSelectItemEvent) {
     this._marvelService.getCharacter(event.item).subscribe((data) => {

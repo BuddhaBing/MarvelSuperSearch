@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/switchMap';
 
 import { MarvelService } from './../services/marvel.service';
@@ -17,10 +19,10 @@ import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap/typeahea
 })
 export class SearchBoxComponent implements OnInit {
 
-  @Input() placeholder?: string;
   @Input() onSelectItem: Function;
+  @Input() placeholder?: string;
 
-  public searchTerm: string;
+  public searchTerm: any;
 
   constructor(private _marvelService: MarvelService, private _router: Router) { }
 
@@ -28,10 +30,11 @@ export class SearchBoxComponent implements OnInit {
     this.search(Observable.of('searchTerm'));
   }
 
-  public search = (searchTerm$: Observable<string>) =>
+  search = (searchTerm$: Observable<string>) =>
     searchTerm$
       .debounceTime(400)
       .distinctUntilChanged()
-      .switchMap(term => this._marvelService.search(term))
+      .switchMap(term => this._marvelService.search(term)
+        .catch(() => Observable.of([]);
 
 }

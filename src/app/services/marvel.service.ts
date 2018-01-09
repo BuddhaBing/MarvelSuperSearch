@@ -16,6 +16,7 @@ export class MarvelService {
   private characterId: string;
   private characterNames: Array<string> = [];
   private characterList: DynamicStringObjInterface = {};
+
   public character: any;
 
   constructor(private http: Http) {}
@@ -28,8 +29,8 @@ export class MarvelService {
     return this.http.get(this.url.search)
         .map((res: Response) => {
           const characters = res.json().data.results;
-          this.addToCharacters(characters);
-          return this.characterNames;
+          this.extractCharacters(characters);
+          return this.returnNewCharacters(characters);
         })
         .catch(err => Observable.of([]));
   }
@@ -47,13 +48,17 @@ export class MarvelService {
         .catch(err => Observable.throw(err));
   }
 
-  private addToCharacters(characters: any): void {
+  private extractCharacters(characters: Array<any>): void {
     for (const character of characters) {
-      if (!this.isDuplicate(this.characterNames, character.name)) {
-        this.characterNames.push(character.name);
-        this.characterList[character.name] = character.id;
-      }
+      this.characterNames.push(character.name);
+      this.characterList[character.name] = character.id;
     }
+  }
+
+  private returnNewCharacters(characters: any): Array<string> {
+    const start = this.characterNames.length - characters.length;
+    const end = this.characterNames.length;
+    return this.characterNames.slice(start, end);
   }
 
   private isDuplicate(arr: Array<any>, el: any): boolean {
