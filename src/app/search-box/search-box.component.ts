@@ -18,7 +18,7 @@ import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap/typeahea
 export class SearchBoxComponent implements OnInit {
 
   @Input() placeholder?: string;
-  @Output() selectedItem: EventEmitter<any> = new EventEmitter<any>();
+  @Input() onSelectItem: Function;
 
   public searchTerm: string;
 
@@ -33,11 +33,5 @@ export class SearchBoxComponent implements OnInit {
       .debounceTime(400)
       .distinctUntilChanged()
       .switchMap(term => this._marvelService.search(term))
-
-  onSelectItem(event: NgbTypeaheadSelectItemEvent) {
-    this._marvelService.getCharacter(event.item).subscribe((data) => {
-      this._router.navigateByUrl('/details');
-    });
-  }
 
 }
