@@ -1,2 +1,2 @@
 <img class="search-logo" src="./../../assets/images/marvel-logo.svg" alt="Marvel Logo">
-<app-search-box [placeholder]="'Search Marvel characters...'"></app-search-box>
+<app-search-box [placeholder]="'Search Marvel characters...'" (onSelectItem)="getCharacter($event)"></app-search-box>

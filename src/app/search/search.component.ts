@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MarvelService } from './../services/marvel.service';
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _marvelService: MarvelService) { }
 
   ngOnInit() {
+  }
+
+  getCharacter(event: any) {
+    console.log(event);
+    // this._marvelService.getCharacter()
   }
 
 }
