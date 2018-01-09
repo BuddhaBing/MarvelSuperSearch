@@ -18,8 +18,8 @@ export class SearchComponent {
   ) {}
 
   getCharacter(event: NgbTypeaheadSelectItemEvent) {
-    this._marvelService.getCharacter(event.item).subscribe((data) => {
-      this._router.navigateByUrl('/details');
+    this._marvelService.getCharacter(event.item).subscribe((character) => {
+      this._router.navigate(['/character', character.id]);
     });
   }
 

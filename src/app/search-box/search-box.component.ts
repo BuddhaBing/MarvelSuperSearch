@@ -35,6 +35,6 @@ export class SearchBoxComponent implements OnInit {
       .debounceTime(400)
       .distinctUntilChanged()
       .switchMap(term => this._marvelService.search(term)
-        .catch(() => Observable.of([]);
+        .catch(() => Observable.of([]));
 
 }
