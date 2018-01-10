@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 
 import { SearchComponent } from './search/search.component';
-import { DetailsComponent } from './details/details.component';
+import { CharacterComponent } from './character/character.component';
+import { CharacterGuard } from './character/character.guard';
 
 const routes: Routes = [
   { path: '', component: SearchComponent },
-  { path: 'character/:id', component: DetailsComponent },
+  { path: 'character', component: CharacterComponent, canActivate: [CharacterGuard] },
+  { path: 'character/:id', component: CharacterComponent, canActivate: [CharacterGuard] },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  providers: [CharacterGuard]
 })
 export class AppRoutingModule { }
 
-export const routingComponents = [SearchComponent, DetailsComponent];
+export const routingComponents = [SearchComponent, CharacterComponent];

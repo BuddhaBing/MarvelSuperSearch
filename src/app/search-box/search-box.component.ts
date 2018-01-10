@@ -8,8 +8,6 @@ import 'rxjs/add/operator/switchMap';
 
 import { MarvelService } from './../services/marvel.service';
 
-import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap/typeahead/typeahead';
-
 @Component({
   selector: 'app-search-box',
   templateUrl: './search-box.component.html',

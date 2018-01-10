@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { MarvelService } from './../services/marvel.service';
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+  selector: 'app-character',
+  templateUrl: './character.component.html',
+  styleUrls: ['./character.component.scss']
 })
-export class DetailsComponent implements OnInit {
+export class CharacterComponent implements OnInit {
 
   public selectedCharacter: any;
 
@@ -22,7 +22,7 @@ export class DetailsComponent implements OnInit {
   }
 
   getCharacter() {
-    this.selectedCharacter = this._marvelService.selectedCharacter || this._router.navigateByUrl('');
+    this.selectedCharacter = this._marvelService.selectedCharacter;
   }
 
 }
