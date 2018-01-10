@@ -15,7 +15,8 @@ export class MarvelService {
   private searchTerm: string;
   private characterId: string;
   private characterNames: Array<string> = [];
-  private characterList: DynamicStringObjInterface = {};
+  private characterIdList: DynamicStringObjInterface = {};
+  private characters: Array<any> = [];
 
   public character: any;
 
@@ -24,8 +25,8 @@ export class MarvelService {
   public search(searchTerm: string): Observable<any> {
     if (searchTerm.length < 2) return Observable.of([]);
     this.searchTerm = searchTerm;
-    const cachedResults = this.getFromCache(searchTerm);
-    if (cachedResults.toString()) return Observable.of(cachedResults);
+    const names: Array<string> = this.filter.names(searchTerm);
+    if (names[0]) return Observable.of(names);
     return this.http.get(this.url.search)
         .map((res: Response) => {
           const characters = res.json().data.results;
@@ -35,17 +36,14 @@ export class MarvelService {
         .catch(err => Observable.of([]));
   }
 
-  public get selectedCharacter(): any {
-    return this.character;
-  }
-
-  public set selectedCharacter(character: any) {
-    this.character = character;
-  }
-
   public getCharacter(characterName: string) {
     this.selectedCharacter = null;
-    this.characterId = this.characterList[characterName];
+    this.characterId = this.characterIdList[characterName];
+    const character: Array<any> = this.filter.character(characterName);
+    if (character[0]) {
+      this.selectedCharacter = character[0];
+      return Observable.of(this.selectedCharacter);
+    }
     return this.http.get(this.url.character)
         .map((res: Response) => {
           this.selectedCharacter = res.json().data.results[0];
@@ -54,10 +52,21 @@ export class MarvelService {
         .catch(err => Observable.throw(err));
   }
 
+  public get selectedCharacter(): any {
+    return this.character;
+  }
+
+  public set selectedCharacter(character: any) {
+    if (character && !this.isDuplicate(this.characters, character)) {
+      this.characters.push(character);
+    }
+    this.character = character;
+  }
+
   private extractCharacters(characters: Array<any>): void {
     for (const character of characters) {
       this.characterNames.push(character.name);
-      this.characterList[character.name] = character.id;
+      this.characterIdList[character.name] = character.id;
     }
   }
 
@@ -71,8 +80,11 @@ export class MarvelService {
     return arr.indexOf(el) !== -1;
   }
 
-  private getFromCache(searchTerm: string): Array<string> {
-    return this.characterNames.filter(name => this.isMatchingSubstring(name, searchTerm));
+  private get filter(): { [key: string]: (string) => Array<string> } {
+    return {
+      names: (searchTerm: string) => this.characterNames.filter(name => this.isMatchingSubstring(name, searchTerm)),
+      character: (characterName: string) => this.characters.filter(character => character.name === characterName)
+    };
   }
 
   private isMatchingSubstring(string: string, substring): boolean {
