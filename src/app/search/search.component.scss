@@ -1,0 +1,8 @@
+@import './../../styles';
+
+.search-logo {
+    width: $search-box-width;
+    $search-box-max-width: 90%;
+    height: auto;
+    margin-top: $search-logo-margin-top;
+}

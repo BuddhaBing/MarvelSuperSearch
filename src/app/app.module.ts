@@ -1,18 +1,39 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 
+// Routing & routing components
+import { AppRoutingModule, routingComponents } from './app.routing';
+
+// Components
+import { SearchBoxComponent } from './search-box/search-box.component';
+
+// Services
+import { MarvelService } from './services/marvel.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    routingComponents,
+    SearchBoxComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    AppRoutingModule,
+    NgbModule.forRoot(),
+    NgbTypeaheadModule
   ],
-  providers: [],
+  providers: [
+    MarvelService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

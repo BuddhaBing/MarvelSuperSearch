@@ -1,0 +1,9 @@
+<input id="typeahead-http" 
+       type="text"
+       name="search"
+       class="form-control"
+       [(ngModel)]="searchTerm"
+       [ngbTypeahead]="search"
+       [placeholder]="placeholder"
+       (selectItem)="onSelectItem($event)"
+/>
