@@ -13,7 +13,7 @@ export class CharacterComponent implements OnInit {
   public selectedCharacter: any;
 
   constructor(
-    private _marvelService: MarvelService,
+    public _marvelService: MarvelService,
     private _router: Router
   ) { }
 
@@ -23,6 +23,10 @@ export class CharacterComponent implements OnInit {
 
   getCharacter() {
     this.selectedCharacter = this._marvelService.selectedCharacter;
+  }
+
+  back() {
+    this._router.navigate(['']);
   }
 
 }

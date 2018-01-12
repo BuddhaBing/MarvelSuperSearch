@@ -20,7 +20,7 @@ export class SearchBoxComponent implements OnInit {
 
   public searchTerm: any;
 
-  constructor(private _marvelService: MarvelService, private _router: Router) { }
+  constructor(public _marvelService: MarvelService, private _router: Router) { }
 
   ngOnInit() {
     this.search(Observable.of('searchTerm'));
