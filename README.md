@@ -1,27 +1,42 @@
-# MarvelSuperSearch
+# Marvel Super Search
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
+## Technologies
+* [TypeScript](https://www.typescriptlang.org/)
+* [Angular v5](https://angular.io/)
+* [Official Marvel API](https://developer.marvel.com/docs)
+* [Bootstrap v4](https://getbootstrap.com/)
 
-## Development server
+## The Brief
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Build a simple web app that allows you to search for something and then select a result to view using Typeahead. On selection of a search result, navigate to a new page and display the details of the result.
 
-## Code scaffolding
+## My Approach
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+I first considered which data set to use, and comtemplated developing a backend. In the end I decided against building a backend as it didn't seem necessary for such a simple app, and there are a multitude of awesome data sources and APIs out there. I finally settled on the Marvel API as it is quite comprehensive and offers the ability to search for a Marvel character by the start of the character's name, which is ideal for this project.
 
-## Build
+I work with Angular on a daily basis, so most of this was familiar territory for me, but I work specifically with Ionic, which has some differences from pure Angular, and this occassionally caused some issues. I resolved most of them, but in the interest of time I had to cut a few corners to get meet the specification. 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Given more time I would refactor the search box component so that it doesn't make the call to the router in order to navigate to the details page, I think this should be handled by the search page. Also, I would implement a proper CanActivate guard for the details page to ensure that the user cannot navigate to the page without having first searched for and selected a character. Instead I implemented a check once the page is activated and navigated back to the home page if there is no selected character, but this is a bit of a hacky implementation. There is also a bug with the typeahead search that I didn't get round to resolving, where if you search for a character, and then start another search for a different character, the results of the previous search are shown in the dropdown also.
 
-## Running unit tests
+In hindsight, I would have left all of the styling until last and classed that as post-MVP. I feel I wasted too much time on styling the app, thinking that I would have enough time to finish everything anyway, and then got caught short at the end.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+I would also liked to have followed TDD for the project, but again in the interest of time I decided against it. Given more time I would write to retrospective unit and end-to-end tests using Jasmine and Protractor.
 
-## Running end-to-end tests
+## <a name="install">Installation</a>
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```
+$ git clone https://github.com/treborb/MarvelSuperSearch.git
+$ cd MarvelSuperSearch
+$ npm install
+```
 
-## Further help
+## <a name="usage">Usage</a>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+$ ng serve
+$ open http://localhost:4200
+```
+
+Begin entering a Marvel character's name into the search box to see a list of results.
+
+Select a result to see details of your selected character

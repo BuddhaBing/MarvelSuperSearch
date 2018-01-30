@@ -1,0 +1,14 @@
+@import './../styles';
+
+.navbar-brand {
+    font-family: $marvellish-font;
+    margin: auto;
+    font-size: $navbar-title-font-size;
+    letter-spacing: $navbar-title-letter-spacing;
+}
+.content {
+    display: block;
+    text-align: -webkit-center;
+    height: $content-height;
+    width: $content-width;
+}

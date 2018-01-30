@@ -1,0 +1,12 @@
+<div class="character-container">
+  <a class="back" (click)="back()">Back</a>
+  <h1 class="name">{{selectedCharacter.name}}</h1>
+  <div class="image">
+    <img src="{{selectedCharacter.thumbnail.path + '.' + selectedCharacter.thumbnail.extension}}" alt="{{selectedCharacter.name}}">
+  </div>
+  <div *ngIf="selectedCharacter.description" class="description">
+    <p>
+      {{selectedCharacter.description}}
+    </p>
+  </div>
+</div>

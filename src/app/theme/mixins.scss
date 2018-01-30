@@ -1,0 +1,4 @@
+@mixin center-horizontal($element-width) {
+    position: absolute;
+    left: calc(50% - (#{$element-width} / 2));
+}

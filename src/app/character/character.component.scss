@@ -1,0 +1,61 @@
+@import './../../styles';
+
+.character-container {
+    display: inline-block;
+}
+.name {
+    margin-top: 2rem;
+    font-family: $marvellish-font;
+    font-size: 5rem;
+    font-weight: 600;
+    letter-spacing: $navbar-title-letter-spacing;
+    color: white;
+    text-transform: uppercase;
+}
+.image {
+    width: 45%;
+    margin-top: 5rem;
+    height: 500px;
+    max-height: 50vh;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    margin-right: 5%;
+}
+.image img {
+    height: 100%;
+}
+.description {
+    width: 49%;
+    margin-top: 5rem;
+    height: 500px;
+    max-height: 50vh;
+    font-size: 1.5rem;
+    display: inline-block;
+    vertical-align: top;
+    text-align: justify;
+}
+.description p {
+    width: 80%;
+    background-color: #fff;
+    padding: 3rem;
+    box-shadow: 0 0 4px 1px #efefef inset;
+    border-radius: 10px;
+    height: 100%;
+}
+a.back {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-family: $marvellish-font;
+    letter-spacing: $navbar-title-letter-spacing;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
+.back:before {
+    content: '\00AB';
+    font-size: 5rem;
+    vertical-align: sub;
+}
